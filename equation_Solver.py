@@ -10,7 +10,7 @@ def equation_solver(equation):
                 eq[i + 1] != "*" and eq[i - 1] != "*"):  # the number with this conditions
             temp3 = []
             j = i
-            if all(item.isdigit() for item in temp):  # specific problem
+            if all(item.isdigit() or item=="." for item in temp):  # specific problem
                 number = temp
                 end = len(temp)
                 break
@@ -75,4 +75,4 @@ def equation_solver(equation):
     return output / temp2
 
 
-print(equation_solver("78.5*y+33=10.5"))
+print(equation_solver("15.16478-5.5454*x=12.54"))
