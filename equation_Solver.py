@@ -1,16 +1,26 @@
 def equation_solver(equation):
+    def is_number(num):
+        try:
+            float(num)
+            return True
+        except ValueError:
+            return False
+
     k, start, end = 0, 0, 0
-    number, temp, temp2 = [], [], []
+    number, temp, temp2, temp4 = [], [], [], []
     equation = list(equation)
     eq = equation[equation.index("=")::-1][::-1]
     output = equation[equation.index("=") + 1::]
     for i in range(len(eq)):
         temp.append(eq[i])  # all values of the loop
+        for b in eq:  # remove all spaces
+            if b == " ":
+                eq.remove(" ")
         if (eq[i + 1] == "+" or eq[i + 1] == "-" or eq[i - 1] == "+" or eq[i - 1] == "-") and (
-                eq[i + 1] != "*" and eq[i - 1] != "*"):  # the number with this conditions
+                eq[i + 1] != "*" and eq[i - 1] != "*") and is_number(eq[i]):  # the number with this conditions
             temp3 = []
             j = i
-            if all(item.isdigit() or item=="." for item in temp):  # specific problem
+            if all(item.isdigit() or item == "." for item in temp):  # specific problem
                 number = temp
                 end = len(temp)
                 break
@@ -30,6 +40,18 @@ def equation_solver(equation):
                 start = i - k
                 end = h
                 break
+        if i == len(eq) - 2:
+            if len(eq) == 2:
+                return ''.join(output)
+            if len(eq) == 3 and eq[0] == "-":
+                return eval(f"-{''.join(output)}")
+            if eq[0] == "-":
+                temp4.append("-")
+            for c in eq:
+                if is_number(c):
+                    temp4.append(c)
+            return eval(''.join(output)) / eval("".join(temp4))
+
     if len(number) == 0:  # simple equation problem
         for d in eq:
             if d.isdigit() or d == "+" or d == "-":
@@ -75,4 +97,4 @@ def equation_solver(equation):
     return output / temp2
 
 
-print(equation_solver("15.16478-5.5454*x=12.54"))
+print(equation_solver("-25*x+3=10"))
