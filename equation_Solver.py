@@ -86,9 +86,18 @@ def equation_solver(equation):
             eq.pop(start)
         if eq[0] == "*":
             eq.pop(0)
+
+    if len(eq) == 3:
+        return eval(''.join(output))
+    if len(eq) == 4 and eq[0] == "-":
+        return eval(f"-{''.join(output)}")
     for d in eq:
-        if d.isdigit() or d == "+" or d == "-" or d == ".":
+        if d.isdigit() or d == "+" or d == "-" or d == "." and eq[eq.index(d) + 1] != "=":
             temp2.append(d)
+
+    if len(temp2) == 2:
+        temp2.append(1)
+
     if temp2[len(temp2) - 1] == "+" or temp2[len(temp2) - 1] == "-":
         temp2.pop()
 
@@ -97,4 +106,4 @@ def equation_solver(equation):
     return output / temp2
 
 
-print(equation_solver("-25*x+3=10"))
+print(equation_solver("-5*x + 0.6 = 2.0"))
