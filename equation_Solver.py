@@ -48,7 +48,7 @@ def equation_solver(equation):
             if eq[0] == "-":
                 temp4.append("-")
             for c in eq:
-                if is_number(c):
+                if is_number(c) or c == ".":
                     temp4.append(c)
             return eval(''.join(output)) / eval("".join(temp4))
 
@@ -106,4 +106,4 @@ def equation_solver(equation):
     return output / temp2
 
 
-print(equation_solver("-5*x + 0.6 = 2.0"))
+print(equation_solver("1.0*x=3.0"))
