@@ -91,6 +91,8 @@ def equation_solver(equation):
         return eval(''.join(output))
     if len(eq) == 4 and eq[0] == "-":
         return eval(f"-{''.join(output)}")
+    if len(eq) == 2:
+        return eval(''.join(output))
     for d in eq:
         if d.isdigit() or d == "+" or d == "-" or d == "." and eq[eq.index(d) + 1] != "=":
             temp2.append(d)
@@ -106,4 +108,4 @@ def equation_solver(equation):
     return output / temp2
 
 
-print(equation_solver("1.0*x=3.0"))
+print(equation_solver("x-9.0=3.0"))
